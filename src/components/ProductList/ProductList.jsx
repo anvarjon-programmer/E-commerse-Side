@@ -19,7 +19,6 @@ const ProductList = ({products, status}) => {
 
     if(status === STATUS.ERROR) return (<Error />);
     if(status === STATUS.LOADING) return (<Loader />);
-
     return (
         <section className='product py-5 bg-ghost-white' id = "products">
             { isModalVisible && <SingleProduct />}
@@ -31,11 +30,15 @@ const ProductList = ({products, status}) => {
                     </div>
                     <div className='product-items grid'>
                         {
-                            products.slice(0, 20).map(product => (
-                                <div className='product-item bg-white' key = {product.id} onClick = {() => viewModalHandler(product)}>
+                            products.slice(0, 20).map(product => {
+                                console.log("product images", )
+                                const data = product?.images?.[0];
+                                const  imageUrl = data.substring(2, data.length - 2);
+    
+                                return (
+                                    <div className='product-item bg-white' key = {product.id} onClick = {() => viewModalHandler(product)}>
                                     <div className='product-item-img'>
-                                        <img src = {product.images[0]} alt = "" />
-                                        {console.log(product.images[0])}
+                                        <img src = {imageUrl} alt = "" />
                                         <div className = "product-item-cat text-white fs-13 text-uppercase bg-gold fw-6">{product.category.name}</div>
                                     </div>
                                     <div className='product-item-body'>
@@ -43,7 +46,8 @@ const ProductList = ({products, status}) => {
                                         <div className = "product-item-price text-regal-blue fw-7 fs-18">{formatPrice(product.price)}</div>
                                     </div>
                                 </div>
-                            ))
+                                )
+                            })
                         }
                     </div>
                 </div>

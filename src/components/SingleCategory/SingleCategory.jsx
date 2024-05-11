@@ -30,7 +30,7 @@ const SingleCategory = ({products, status}) => {
                     </div>
                     <div className='product-items grid'>
                         {
-                            products.map(product => (
+                            products?.map(product => (
                                 <div className='product-item bg-white' key = {product.id} onClick = {() => viewModalHandler(product)}>
                                     <div className='product-item-img'>
                                         <img src = {product.images[0]} alt = "" />
